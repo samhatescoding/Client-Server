@@ -29,8 +29,9 @@ public class Server {
                 System.out.println("Server connected to client.");
 
                 while(true){
-                    int receivedInt = dataInputStream.readInt();
-                    System.out.println("Received: " + receivedInt);
+                    String received = dataInputStream.readUTF();
+                    System.out.println("Received: " + received);
+                    this.dataOutputStream.writeUTF("Server received: " + received);
                 }
             } catch (Exception e) {}
         }

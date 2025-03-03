@@ -3,6 +3,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 /**
  * Client class to establish a connection to a server and manage communication.
  */
@@ -34,7 +35,16 @@ public class Client {
         String host = args[1]; 
         Client client = new Client(host, port);
 
-        try{ client.dataOutputStream.writeInt(1234); }
-        catch (Exception e) {}
+        /* Writes to the Server */
+        Scanner scanner = new Scanner(System.in);
+        while(true){
+            String input = scanner.nextLine();
+            if (input == "") break;
+            try{
+                client.dataOutputStream.writeUTF(input);
+                System.out.println(client.dataInputStream.readUTF());
+            } catch (Exception e) {}
+        }
+        scanner.close();
     }
 }
